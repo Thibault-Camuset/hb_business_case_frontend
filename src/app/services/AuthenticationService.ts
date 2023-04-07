@@ -1,13 +1,19 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { LocalStorageService } from './LocalStorageService';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private storage: LocalStorageService
+    ) 
+    {}
 
+  // TODO: exporter en constante
   rootURL = 'http://localhost:8080/api/auth';
 
   login(userEmail: string, userPassword: string) {
@@ -43,5 +49,21 @@ export class AuthenticationService {
       );
 
   }
+
+
+  logout() {
+
+    let headers = {
+        "Authorization" : 'Bearer ' + this.storage.getData("JWT")
+    }
+
+    return this.http
+          .post(
+            this.rootURL + '/logout',
+            {},
+            {headers}
+          );
+
+      }
 
 }

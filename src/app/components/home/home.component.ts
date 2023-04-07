@@ -18,7 +18,6 @@ export class HomeComponent implements OnInit {
     constructor(
       private authService: AuthenticationService,
       private storageService: LocalStorageService,
-      private userService: UserService,
       private countryService: CountryService
     ) 
     {}
@@ -32,7 +31,7 @@ export class HomeComponent implements OnInit {
 
     public testRegister(): void {
 
-      console.log("TestRegister en cours...")
+      console.log("TestRegister en cours...");
       
       let userLastName : string = "LeGrand";
       let userFirstName : string = "Tata";
@@ -40,6 +39,7 @@ export class HomeComponent implements OnInit {
       let userPassword : string = "Coucou";
 
       this.subscriptions.push(
+
         this.authService.register(userLastName, userFirstName, userEmail, userPassword)
           .subscribe(
             (data : any) => {
@@ -47,6 +47,7 @@ export class HomeComponent implements OnInit {
               console.log(this.storageService.getData("JWT"));
             }
           )
+
       );
 
     }
@@ -61,6 +62,7 @@ export class HomeComponent implements OnInit {
       let userPassword : string = "Coucou";
 
       this.subscriptions.push(
+
         this.authService.login(userEmail, userPassword)
           .subscribe(
             (data : any) => {
@@ -68,6 +70,7 @@ export class HomeComponent implements OnInit {
               console.log(this.storageService.getData("JWT"));
             }
           )
+
       );
 
     }
@@ -86,5 +89,10 @@ export class HomeComponent implements OnInit {
       );
 
     }
+
+    public ngOnDestroy(): void {
+
+    }
+    
 
 }

@@ -17,13 +17,9 @@ export class CountryService {
   getAll() {
 
     let headers = {
-        "Access-Control-Allow-Headers" : "Origin, X-Requested-With, Content-Type, Accept",
-        'Access-Control-Allow-Origin' : '*',
         "Authorization" : 'Bearer ' + this.storage.getData("JWT")
     }
 
-    console.log(headers);
-  
     return this.http
       .get(
         this.rootURL + '',

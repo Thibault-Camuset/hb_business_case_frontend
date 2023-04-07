@@ -1,0 +1,31 @@
+<app-navbar></app-navbar>
+
+<div class="card mt-5">
+    <form [formGroup]="loginForm" class="grid">
+
+            <div class="col-5 flex align-items-center justify-content-center">
+                <div class="p-fluid">
+                    <div class="field">
+                        <label for="userEmail">User Email</label>
+                        <input formControlName="userEmail" pInputText id="userEmail" type="text" />
+                    </div>
+                    <div class="field">
+                        <label for="userPassword">Password</label>
+                        <input pInputText formControlName="userPassword" id="userPassword" type="password" />
+                    </div>
+                    <p-button label="Login" (click)="doLogin()"></p-button>
+                </div>
+            </div>
+
+            <div class="col-2">
+                <p-divider layout="vertical">
+                    <b>OR</b>
+                </p-divider>
+            </div>
+
+            <div class="col-5 flex align-items-center justify-content-center">
+                <p-button (click)="redirectToRegister()" label="Sign Up" icon="pi pi-user-plus" styleClass="p-button-success"></p-button>
+            </div>
+
+        </form>
+</div>
