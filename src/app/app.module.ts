@@ -8,13 +8,18 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './components/navbar/navbar.component';
 import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
 
 import { MenubarModule } from 'primeng/menubar';
 import { DividerModule } from 'primeng/divider';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { ButtonModule } from 'primeng/button';
-import { RegisterComponent } from './components/register/register.component';
+import { TableModule } from 'primeng/table';
+
+import { NewAddComponent } from './components/adds/new-add/new-add.component';
+import { AddsListComponent } from './components/adds/adds-list/adds-list.component';
+
 
 @NgModule({
   declarations: [
@@ -22,7 +27,9 @@ import { RegisterComponent } from './components/register/register.component';
     NavBarComponent,
     HomeComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    NewAddComponent,
+    AddsListComponent
   ],
   imports: [
     BrowserModule,
@@ -35,6 +42,7 @@ import { RegisterComponent } from './components/register/register.component';
     PasswordModule,
     ButtonModule, 
     InputTextModule,
+    TableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

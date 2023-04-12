@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { Subscription } from 'rxjs';
@@ -10,13 +10,12 @@ import { LocalStorageService } from 'src/app/services/LocalStorageService';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavBarComponent implements OnInit {
+export class NavBarComponent implements OnInit, OnDestroy {
 
     constructor(
       private authService: AuthenticationService,
       private storageService: LocalStorageService,
       private router: Router,
-      private route: ActivatedRoute,
     ) 
     {}
 
@@ -35,24 +34,37 @@ export class NavBarComponent implements OnInit {
 
         this.items = [  
             {
-                label: 'Login',
-                icon: 'pi pi-fw pi-file',
-                routerLink: 'login',
-                visible: !this.isLogged
+                label: 'Home',
+                icon: 'pi pi-fw pi-home',
+                routerLink: '/home'
             },
             {
-                label: 'Sign-Up',
-                icon: 'pi pi-fw pi-file',
-                routerLink: 'register',
+                label: 'Adds',
+                icon: 'pi pi-fw pi-home',
+                routerLink: '/adds',
+                visible: this.isLogged
+            },
+            {
+                label: 'Login',
+                style: {'margin-left': 'auto', 'float': 'right'},
+                icon: 'pi pi-fw pi-sign-in',
+                routerLink: '/login',
                 visible: !this.isLogged
             },
             {
                 label: 'Logout',
-                icon: 'pi pi-fw pi-file',
+                style: {'margin-left': 'auto', 'float': 'right'},
+                icon: 'pi pi-fw pi-sign-out',
                 command: () => this.logout(),
                 visible: this.isLogged
             },
         ];
+    }
+
+    ngOnDestroy(): void {
+
+      this.subscriptions.filter(sub => !sub.closed).forEach(sub => sub.unsubscribe);
+
     }
 
 

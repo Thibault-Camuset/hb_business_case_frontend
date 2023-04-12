@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { LocalStorageService } from './LocalStorageService';
 
 @Injectable({
@@ -64,6 +64,6 @@ export class AuthenticationService {
             {headers}
           );
 
-      }
+    }
 
 }

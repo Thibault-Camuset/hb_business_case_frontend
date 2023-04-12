@@ -26,4 +26,19 @@ export class UserService {
 
   }
 
+  findByEmail() {
+
+    let headers = new HttpHeaders().set("Authorization", 'Bearer ' + this.storage.getData("JWT"));
+      
+
+      let userEmail = this.storage.getData("userEmail")!;
+
+        return this.http
+          .get(
+            this.rootURL + '/byEmail/'+userEmail,
+            {headers}
+          );
+
+  }
+
 }

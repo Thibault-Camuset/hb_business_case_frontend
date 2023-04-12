@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -12,7 +12,7 @@ import { LocalStorageService } from 'src/app/services/LocalStorageService';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit, OnDestroy {
 
     public subscriptions: Subscription[] = [];
 
@@ -64,6 +64,12 @@ export class RegisterComponent implements OnInit {
 
     }
 
+    ngOnDestroy(): void {
+
+      this.subscriptions.filter(sub => !sub.closed).forEach(sub => sub.unsubscribe);
+
+    }
+
 
 
     public doRegister(): void {
@@ -81,8 +87,8 @@ export class RegisterComponent implements OnInit {
           .subscribe(
             (data : any) => {
               this.storageService.saveData("JWT", data.token);
-              this.storageService.saveData("logged", "YES")
-              console.log(this.storageService.getData("JWT"));
+              this.storageService.saveData("logged", "YES");
+              this.storageService.saveData("userEmail", userEmail);
               this.router.navigate(['/home']);
             }
             //TODO : gestion si erreur register

@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -12,15 +12,14 @@ import { LocalStorageService } from 'src/app/services/LocalStorageService';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
 
     public subscriptions: Subscription[] = [];
 
     constructor(
       private authService: AuthenticationService,
       private storageService: LocalStorageService,
-      private http: HttpClient,
-       private router: Router,
+      private router: Router,
     ) 
     {}
 
@@ -50,6 +49,12 @@ export class LoginComponent implements OnInit {
 
     }
 
+    ngOnDestroy(): void {
+
+      this.subscriptions.filter(sub => !sub.closed).forEach(sub => sub.unsubscribe);
+
+    }
+
 
 
     public doLogin(): void {
@@ -68,6 +73,7 @@ export class LoginComponent implements OnInit {
               this.storageService.saveData("JWT", data.token);
               this.storageService.saveData("logged", "YES")
               console.log(this.storageService.getData("JWT"));
+              this.storageService.saveData("userEmail", userEmail);
               this.router.navigate(['/home']);
             }
             //TODO : gestion si erreur login
@@ -77,7 +83,7 @@ export class LoginComponent implements OnInit {
 
     }
 
-    redirectToRegister(): void {
+    public redirectToRegister(): void {
 
       this.router.navigate(['/register']);
 
