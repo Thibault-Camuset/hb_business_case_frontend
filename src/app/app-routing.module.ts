@@ -3,8 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
-import { AddsListComponent } from './components/adds/adds-list/adds-list.component';
-import { NewAddComponent } from './components/adds/new-add/new-add.component';
+import { AdsListComponent } from './components/ads/ads-list/ads-list.component';
+import { NewAdComponent } from './components/ads/new-ad/new-ad.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -13,8 +13,8 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
 
-  { path: 'adds', component: AddsListComponent },
-  { path: 'adds/new', component: NewAddComponent },
+  { path: 'ads', component: AdsListComponent },
+  { path: 'ads/new', component: NewAdComponent },
 
 ];
 

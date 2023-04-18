@@ -1,0 +1,120 @@
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { AuthenticationService } from 'src/app/services/AuthenticationService';
+import { AdService } from 'src/app/services/AdService';
+import { LocalStorageService } from 'src/app/services/LocalStorageService';
+import { UserService } from 'src/app/services/UserService';
+import { Router } from '@angular/router';
+import { Ad } from 'src/app/models/Ad.model';
+import { User } from 'src/app/models/User.model';
+import { AdZoneTimeService } from 'src/app/services/AdZoneTimeService';
+import { AdZoneTime } from 'src/app/models/AdZoneTime';
+import { ZoneService } from 'src/app/services/ZoneService';
+import { TimeSlotService } from 'src/app/services/TimeSlotService';
+import { Zone } from 'src/app/models/Zone.model';
+import { TimeSlot } from 'src/app/models/TimeSlot.model';
+
+@Component({
+  selector: 'app-ads-list',
+  templateUrl: './ads-list.component.html',
+  styleUrls: ['./ads-list.component.css']
+})
+export class AdsListComponent implements OnInit, OnDestroy {
+
+    public subscriptions: Subscription[] = [];
+
+    public currentUser?: User = undefined;
+
+    public ads: Ad[] = [];
+
+    constructor(
+      private authService: AuthenticationService,
+      private storageService: LocalStorageService,
+      private userService: UserService,
+      private adService: AdService,
+      private adZoneTimeService: AdZoneTimeService,
+      private zoneService : ZoneService,
+      private timeSlotService : TimeSlotService,
+      private router: Router
+    ) 
+    {}
+
+  
+    ngOnDestroy(): void {
+
+      this.subscriptions.filter(sub => !sub.closed).forEach(sub => sub.unsubscribe);
+
+    }
+
+    ngOnInit(): void {
+        
+     this.subscriptions.push(
+
+            this.userService.findByEmail().subscribe(
+                (user : User) => {
+                    this.currentUser = user;
+                    // TODO: trouver comme ne pas sérialiser le mot de passe.
+                    this.adService.getAllByUser()
+                      .subscribe(
+                        (data : Array<Ad>) => {
+                          this.ads = data;
+                          
+                          this.ads.forEach(
+                            (ad: Ad) => {
+
+                              ad.zones = [];
+                              ad.timeSlots = [];
+
+                              this.adZoneTimeService.getAllByAdId(ad.adId!).subscribe(
+                                (adZoneTimes: Array<AdZoneTime>) => {
+
+                                  adZoneTimes.forEach(
+                                    (adZoneTime : AdZoneTime) => {
+
+                                      let zonesResult = ad.zones!.find((zone : Zone) => {
+                                        return zone.zoneId === adZoneTime.zone?.zoneId;
+                                      })
+                                      if(zonesResult == undefined) {
+                                        ad.zones?.push(adZoneTime.zone!);
+                                      }
+                                      let timeSlotsResult = ad.timeSlots!.find((timeSlot : TimeSlot) => {
+                                        return timeSlot.timeSlotId === adZoneTime.time?.timeSlotId;
+                                      })
+                                      if(timeSlotsResult == undefined) {
+                                        ad.timeSlots?.push(adZoneTime.time!);
+                                      }
+                                    }
+                                  )
+                                }
+                              )
+                            }
+                          )
+                        }
+                      )
+                })
+      );
+
+    }
+
+
+    public getZonesDisplay(ad: Ad) {
+      return ad.zones && ad.zones.length > 0
+        ? ad.zones.map(zone => zone.zoneName).join(", ")
+        : "No zones have been found"
+      ;
+    }
+
+    public getTimeSlotsDisplay(ad: Ad) {
+      return ad.timeSlots && ad.timeSlots.length > 0
+        ? ad.timeSlots.map(timeSlot => timeSlot.timeSlotName).join(", ")
+        : "No time slots have been found"
+      ;
+    }
+
+    public redirectToCreate(): void {
+
+        this.router.navigate(['/ads/new']);
+
+    }
+
+}

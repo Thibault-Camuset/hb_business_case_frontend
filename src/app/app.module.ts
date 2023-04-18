@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { HomeComponent } from './components/home/home.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -16,9 +17,11 @@ import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
+import { MultiSelectModule } from 'primeng/multiselect';
 
-import { NewAddComponent } from './components/adds/new-add/new-add.component';
-import { AddsListComponent } from './components/adds/adds-list/adds-list.component';
+
+import { NewAdComponent } from './components/ads/new-ad/new-ad.component';
+import { AdsListComponent } from './components/ads/ads-list/ads-list.component';
 
 
 @NgModule({
@@ -28,11 +31,12 @@ import { AddsListComponent } from './components/adds/adds-list/adds-list.compone
     HomeComponent,
     LoginComponent,
     RegisterComponent,
-    NewAddComponent,
-    AddsListComponent
+    NewAdComponent,
+    AdsListComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
@@ -42,7 +46,8 @@ import { AddsListComponent } from './components/adds/adds-list/adds-list.compone
     PasswordModule,
     ButtonModule, 
     InputTextModule,
-    TableModule
+    TableModule,
+    MultiSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

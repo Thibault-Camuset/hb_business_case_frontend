@@ -39,9 +39,9 @@ export class NavBarComponent implements OnInit, OnDestroy {
                 routerLink: '/home'
             },
             {
-                label: 'Adds',
-                icon: 'pi pi-fw pi-home',
-                routerLink: '/adds',
+                label: 'Ads',
+                icon: 'pi pi-fw pi-table',
+                routerLink: '/ads',
                 visible: this.isLogged
             },
             {

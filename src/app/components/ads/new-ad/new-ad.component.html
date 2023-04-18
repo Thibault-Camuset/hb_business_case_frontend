@@ -1,0 +1,46 @@
+<app-navbar></app-navbar>
+
+<div class="card mt-5">
+    <form [formGroup]="adForm" class="grid flex justify-content-center">
+
+        <div class="flex align-items-center justify-content-center">
+            <div class="p-fluid">
+                <div class="field">
+                    <label for="adTitle">Ad Name</label>
+                    <input formControlName="adTitle" pInputText id="adTitle" type="text" />
+                </div>
+                <div class="field">
+                    <label for="adImage">Ad Title</label>
+                    <input formControlName="adImage" pInputText id="adImage" type="text" />
+                </div>
+                <div class="field">
+                    <label for="adDescription">Ad Description</label>
+                    <input formControlName="adDescription" pInputText id="adDescription" type="text" />
+                </div>
+                <div class="field">
+                    <label for="selectedZones">Zones</label>
+                    <p-multiSelect 
+                        [options]="zones"
+                        optionLabel="zoneName" 
+                        formControlName="selectedZones" 
+                        id="selectedZones"
+                    >
+                    </p-multiSelect>
+                </div>
+                <div class="field">
+                    <label for="selectedTimeSlots">Time Slots</label>
+                    <p-multiSelect 
+                        [options]="timeSlots" 
+                        optionLabel="timeSlotName" 
+                        formControlName="selectedTimeSlots" 
+                        id="selectedTimeSlots"
+                    >
+                    </p-multiSelect>
+                </div>
+                
+                <p-button label="Add this ad" (click)="addAd()"></p-button>
+            </div>
+        </div>
+
+    </form>
+</div>
