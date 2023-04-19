@@ -31,6 +31,22 @@ export class AdService {
 
   }
 
+
+
+  public getOneById(adId: string): Observable< Ad > {
+
+    let headers = {
+        "Authorization" : 'Bearer ' + this.storage.getData("JWT")
+    }
+
+    return this.http
+      .get< Ad >(
+        this.rootURL + '/' + adId,
+        {headers}
+      );
+
+  }
+
    public getAllByUser(): Observable< Ad[] > {
 
     let headers = {
@@ -58,6 +74,21 @@ export class AdService {
       .post(
         this.rootURL +"/"+adTitle+"/"+adImage+"/"+adDescription+"/"+author,
         {}, 
+        {headers}   
+      );
+
+  }
+
+
+  public deleteAd(adId: string) {
+
+    let headers = {
+        "Authorization" : 'Bearer ' + this.storage.getData("JWT")
+    }
+
+    return this.http
+      .delete(
+        this.rootURL +"/"+ adId,
         {headers}   
       );
 

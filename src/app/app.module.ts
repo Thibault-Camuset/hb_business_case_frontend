@@ -18,10 +18,13 @@ import { PasswordModule } from 'primeng/password';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { MultiSelectModule } from 'primeng/multiselect';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ToastModule } from 'primeng/toast';
 
 
 import { NewAdComponent } from './components/ads/new-ad/new-ad.component';
 import { AdsListComponent } from './components/ads/ads-list/ads-list.component';
+import { AdDetailsComponent } from './components/ads/ad-details/ad-details.component';
 
 
 @NgModule({
@@ -32,7 +35,8 @@ import { AdsListComponent } from './components/ads/ads-list/ads-list.component';
     LoginComponent,
     RegisterComponent,
     NewAdComponent,
-    AdsListComponent
+    AdsListComponent,
+    AdDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +51,9 @@ import { AdsListComponent } from './components/ads/ads-list/ads-list.component';
     ButtonModule, 
     InputTextModule,
     TableModule,
-    MultiSelectModule
+    MultiSelectModule,
+    ConfirmDialogModule,
+    ToastModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,38 @@
+<app-navbar></app-navbar>
+
+<div class="card">
+    
+    
+    <div class="row mt-5">
+        <div class="col-6">
+            <label class="detail-label">Ad Title</label>
+            <p class="adTitle">{{ currentAd!.adTitle }}</p>
+        </div>
+        <div class="col-6">
+            <label class="detail-label">Ad Author</label>
+            <p class="adAuthor">{{ currentAd!.author!.userFirstName! }} {{ currentAd!.author!.userLastName! }}</p>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-12">
+            <label class="detail-label">Ad Description</label>
+            <p class="adDescription">{{ currentAd!.adDescription }}</p>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-12">
+            <label class="detail-label">Zones</label>
+            <p class="adZones">{{ getZonesDisplay() }}</p>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-12">
+            <label class="detail-label">Time Slots</label>
+            <p class="adTimeSlots">{{ getTimeSlotsDisplay() }}</p>
+        </div>
+    </div>
+
+</div>

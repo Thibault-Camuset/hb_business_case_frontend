@@ -13,11 +13,13 @@ import { ZoneService } from 'src/app/services/ZoneService';
 import { TimeSlotService } from 'src/app/services/TimeSlotService';
 import { Zone } from 'src/app/models/Zone.model';
 import { TimeSlot } from 'src/app/models/TimeSlot.model';
+import { ConfirmationService, MessageService, ConfirmEventType } from 'primeng/api';
 
 @Component({
   selector: 'app-ads-list',
   templateUrl: './ads-list.component.html',
-  styleUrls: ['./ads-list.component.css']
+  styleUrls: ['./ads-list.component.css'],
+  providers: [ConfirmationService, MessageService]
 })
 export class AdsListComponent implements OnInit, OnDestroy {
 
@@ -35,7 +37,9 @@ export class AdsListComponent implements OnInit, OnDestroy {
       private adZoneTimeService: AdZoneTimeService,
       private zoneService : ZoneService,
       private timeSlotService : TimeSlotService,
-      private router: Router
+      private router: Router,
+      private confirmationService: ConfirmationService, 
+      private messageService: MessageService
     ) 
     {}
 
@@ -48,7 +52,13 @@ export class AdsListComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         
-     this.subscriptions.push(
+      this.refreshData();
+    
+    }
+
+    public refreshData(): void {
+
+      this.subscriptions.push(
 
             this.userService.findByEmail().subscribe(
                 (user : User) => {
@@ -109,6 +119,32 @@ export class AdsListComponent implements OnInit, OnDestroy {
         ? ad.timeSlots.map(timeSlot => timeSlot.timeSlotName).join(", ")
         : "No time slots have been found"
       ;
+    }
+
+    public goToDetails(ad: Ad): void {
+
+      this.router.navigate(['/ads/details/', ad.adId]);
+
+    }
+
+    public deleteAd(ad: Ad): void {
+
+      this.confirmationService.confirm({
+            message: 'Do you want to delete this ad?',
+            header: 'Delete Confirmation',
+            icon: 'pi pi-info-circle',
+            accept: () => {
+                this.subscriptions.push(
+                  this.adService.deleteAd(ad.adId!).subscribe(
+                    result => {
+                      this.refreshData();
+                    }
+                  )
+                )
+                this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'Record deleted' });
+            },
+        });
+
     }
 
     public redirectToCreate(): void {

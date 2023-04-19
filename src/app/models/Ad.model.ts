@@ -12,6 +12,10 @@ export class Ad {
 
     public adDescription? : string = undefined;
 
+    public adStatus? : string = undefined;
+
+    public adIsDeleted? : boolean = undefined;
+
     public author? : User = undefined;
 
     public zones?: Array<Zone> = [];
