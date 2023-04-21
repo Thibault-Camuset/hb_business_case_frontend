@@ -2,3 +2,23 @@
 @import "../node_modules/primeng/resources/primeng.min.css";
 @import "../node_modules/primeicons/primeicons.css";
 @import "../node_modules/primeflex/primeflex.min.css";
+
+
+.label-chip-Pending>div>div,
+.label-chip-Accepted>div>div,
+.label-chip-Cancelled>div>div {
+    color: black;
+    font-weight: bold;
+}
+
+.label-chip-Pending>div {
+    background-color: gold;
+}
+
+.label-chip-Accepted>div {
+    background-color: rgb(51, 236, 51);
+}
+
+.label-chip-Cancelled>div {
+    background-color: rgb(231, 47, 47);
+}

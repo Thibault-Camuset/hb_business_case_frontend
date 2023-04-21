@@ -14,6 +14,7 @@ import { TimeSlotService } from 'src/app/services/TimeSlotService';
 import { Zone } from 'src/app/models/Zone.model';
 import { TimeSlot } from 'src/app/models/TimeSlot.model';
 import { ConfirmationService, MessageService, ConfirmEventType } from 'primeng/api';
+import { Role } from 'src/app/models/Role.model';
 
 @Component({
   selector: 'app-ads-list',
@@ -63,6 +64,7 @@ export class AdsListComponent implements OnInit, OnDestroy {
             this.userService.findByEmail().subscribe(
                 (user : User) => {
                     this.currentUser = user;
+                    console.log(this.currentUser);
                     // TODO: trouver comme ne pas sérialiser le mot de passe.
                     this.adService.getAllByUser()
                       .subscribe(
@@ -74,6 +76,7 @@ export class AdsListComponent implements OnInit, OnDestroy {
 
                               ad.zones = [];
                               ad.timeSlots = [];
+                              ad.totalPrice = 0;
 
                               this.adZoneTimeService.getAllByAdId(ad.adId!).subscribe(
                                 (adZoneTimes: Array<AdZoneTime>) => {
@@ -81,15 +84,17 @@ export class AdsListComponent implements OnInit, OnDestroy {
                                   adZoneTimes.forEach(
                                     (adZoneTime : AdZoneTime) => {
 
+                                      ad.totalPrice! += adZoneTime.price!;
+
                                       let zonesResult = ad.zones!.find((zone : Zone) => {
                                         return zone.zoneId === adZoneTime.zone?.zoneId;
-                                      })
+                                      });
                                       if(zonesResult == undefined) {
                                         ad.zones?.push(adZoneTime.zone!);
                                       }
                                       let timeSlotsResult = ad.timeSlots!.find((timeSlot : TimeSlot) => {
                                         return timeSlot.timeSlotId === adZoneTime.time?.timeSlotId;
-                                      })
+                                      });
                                       if(timeSlotsResult == undefined) {
                                         ad.timeSlots?.push(adZoneTime.time!);
                                       }
@@ -141,7 +146,27 @@ export class AdsListComponent implements OnInit, OnDestroy {
                     }
                   )
                 )
-                this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'Record deleted' });
+                this.messageService.add({ severity: 'info', summary: 'Cancelled', detail: 'Ad cancelled' });
+            },
+        });
+
+    }
+
+    public validateAd(ad: Ad): void {
+
+      this.confirmationService.confirm({
+            message: 'Do you want to validate this ad?',
+            header: 'Validation Confirmation',
+            icon: 'pi pi-info-circle',
+            accept: () => {
+                this.subscriptions.push(
+                  this.adService.validateAd(ad.adId!).subscribe(
+                    result => {
+                      this.refreshData();
+                    }
+                  )
+                )
+                this.messageService.add({ severity: 'info', summary: 'Validated', detail: 'Ad validated' });
             },
         });
 

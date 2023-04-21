@@ -20,6 +20,8 @@ import { TableModule } from 'primeng/table';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
+import { ChipModule } from 'primeng/chip';
+import { FileUploadModule } from 'primeng/fileupload';
 
 
 import { NewAdComponent } from './components/ads/new-ad/new-ad.component';
@@ -53,7 +55,9 @@ import { AdDetailsComponent } from './components/ads/ad-details/ad-details.compo
     TableModule,
     MultiSelectModule,
     ConfirmDialogModule,
-    ToastModule
+    ToastModule,
+    ChipModule,
+    FileUploadModule
   ],
   providers: [],
   bootstrap: [AppComponent]

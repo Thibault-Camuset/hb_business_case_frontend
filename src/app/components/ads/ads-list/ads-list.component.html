@@ -4,27 +4,28 @@
     <ng-template pTemplate="header">
         <tr>
             <th>Title</th>
-            <th>Image</th>
             <th>Description</th>
             <th>Author</th>
             <th>Zones</th>
             <th>TimeSlots</th>
             <th>Status</th>
+            <th>Total Price</th>
             <th>Actions</th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-ad>
         <tr>
             <td>{{ ad.adTitle }}</td>
-            <td>{{ ad.adImage }}</td>
             <td>{{ ad.adDescription }}</td>
             <td>{{ ad.author.userLastName}} {{ad.author.userFirstName }}</td>
             <td>{{ getZonesDisplay(ad) }}</td>
             <td>{{ getTimeSlotsDisplay(ad) }}</td>
-            <td>{{ ad.adStatus }}</td>
+            <td><p-chip class="label-chip-{{ ad.adStatus }}" label="{{ ad.adStatus }}"></p-chip></td>
+            <td>{{ ad.totalPrice }} €</td>
             <td>
-                <p-button icon="pi pi-search" styleClass="p-button-success" class="mr-2" (click)="goToDetails(ad)"></p-button>
-                <p-button *ngIf="!ad.adIsDeleted" icon="pi pi-times" styleClass="p-button-danger" (click)="deleteAd(ad)"></p-button>
+                <p-button icon="pi pi-search" styleClass="p-button-warning" class="mr-2" (click)="goToDetails(ad)" title="Details"></p-button>
+                <p-button *ngIf="!ad.adIsDeleted && ad.adStatus == 'Pending' && currentUser!.userRole!.roleName! == 'ADMIN'" icon="pi pi-check" styleClass="p-button-success" class="mr-2" (click)="validateAd(ad)" title="Validate"></p-button>
+                <p-button *ngIf="!ad.adIsDeleted" icon="pi pi-times" styleClass="p-button-danger" (click)="deleteAd(ad)" title="Cancel"></p-button>
             </td>
         </tr>
     </ng-template>

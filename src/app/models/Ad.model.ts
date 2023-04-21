@@ -22,4 +22,6 @@ export class Ad {
 
     public timeSlots?: Array<TimeSlot> = [];
 
+    public totalPrice?: number = 0;
+
 }

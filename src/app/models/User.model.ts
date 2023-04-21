@@ -1,3 +1,5 @@
+import { Role } from "./Role.model";
+
 export class User {
 
     public userId? : string = undefined;
@@ -15,5 +17,7 @@ export class User {
     public userPostalCode? : string = undefined;
 
     public userCity? : string = undefined;
+
+    public userRole? : Role = undefined;
 
 }

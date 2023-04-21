@@ -2,7 +2,7 @@
 
 <div class="card">
     
-    
+
     <div class="row mt-5">
         <div class="col-6">
             <label class="detail-label">Ad Title</label>
@@ -11,6 +11,13 @@
         <div class="col-6">
             <label class="detail-label">Ad Author</label>
             <p class="adAuthor">{{ currentAd!.author!.userFirstName! }} {{ currentAd!.author!.userLastName! }}</p>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-12">
+            <label class="detail-label">Ad Image</label>
+            <img class="adImage" src="{{ currentAd!.adImage }}/">
         </div>
     </div>
 

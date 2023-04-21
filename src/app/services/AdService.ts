@@ -70,11 +70,15 @@ export class AdService {
         "Authorization" : 'Bearer ' + this.storage.getData("JWT")
     }
 
+    let params = {
+      'adImage' : adImage,
+    };
+
     return this.http
       .post(
-        this.rootURL +"/"+adTitle+"/"+adImage+"/"+adDescription+"/"+author,
+        this.rootURL +"/"+adTitle+"/"+adDescription+"/"+author,
         {}, 
-        {headers}   
+        {headers, params}   
       );
 
   }
@@ -89,6 +93,20 @@ export class AdService {
     return this.http
       .delete(
         this.rootURL +"/"+ adId,
+        {headers}   
+      );
+
+  }
+
+  public validateAd(adId: string) {
+
+    let headers = {
+        "Authorization" : 'Bearer ' + this.storage.getData("JWT")
+    }
+
+    return this.http
+      .get(
+        this.rootURL +"/accept/"+ adId,
         {headers}   
       );
 
