@@ -6,4 +6,6 @@ export class Zone {
 
     public zoneBasePrice? : number = 0;
 
+    public zoneIsDeleted?: boolean = false;
+
 }

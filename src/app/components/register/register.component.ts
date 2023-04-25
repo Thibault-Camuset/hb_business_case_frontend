@@ -44,14 +44,21 @@ export class RegisterComponent implements OnInit, OnDestroy {
           "",
           {
             nonNullable: true,
-            validators: [Validators.required]
+            validators: [
+              Validators.required, 
+              Validators.email]
           }
         ),
         userPassword: new FormControl(
           "",
           {
             nonNullable: true,
-            validators: [Validators.required]
+            validators: [
+              Validators.required,
+              Validators.minLength(8),
+              Validators.pattern(
+                /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*#?&^_-])/
+              ),]
           }
         ),
     })

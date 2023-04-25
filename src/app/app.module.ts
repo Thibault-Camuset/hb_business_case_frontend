@@ -22,11 +22,17 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
 import { ChipModule } from 'primeng/chip';
 import { FileUploadModule } from 'primeng/fileupload';
+import { TooltipModule } from 'primeng/tooltip';
+import { InputNumberModule } from 'primeng/inputnumber';
+import {MessagesModule} from 'primeng/messages';
+import {MessageModule} from 'primeng/message';
 
 
 import { NewAdComponent } from './components/ads/new-ad/new-ad.component';
 import { AdsListComponent } from './components/ads/ads-list/ads-list.component';
 import { AdDetailsComponent } from './components/ads/ad-details/ad-details.component';
+import { ZonesListComponent } from './components/zones/zones-list/zones-list.component';
+import { NewZoneComponent } from './components/zones/new-zone/new-zone.component';
 
 
 @NgModule({
@@ -38,7 +44,9 @@ import { AdDetailsComponent } from './components/ads/ad-details/ad-details.compo
     RegisterComponent,
     NewAdComponent,
     AdsListComponent,
-    AdDetailsComponent
+    AdDetailsComponent,
+    ZonesListComponent,
+    NewZoneComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +65,11 @@ import { AdDetailsComponent } from './components/ads/ad-details/ad-details.compo
     ConfirmDialogModule,
     ToastModule,
     ChipModule,
-    FileUploadModule
+    FileUploadModule,
+    TooltipModule, 
+    InputNumberModule,
+    MessageModule,
+    MessagesModule
   ],
   providers: [],
   bootstrap: [AppComponent]

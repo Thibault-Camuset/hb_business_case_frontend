@@ -29,7 +29,9 @@ export class LoginComponent implements OnInit, OnDestroy {
           "",
           {
             nonNullable: true,
-            validators: [Validators.required]
+            validators: [
+              Validators.required, 
+              Validators.email]
           }
         ),
         userPassword: new FormControl(
@@ -59,9 +61,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     public doLogin(): void {
 
-      //TODO : verif si loggé, si bon user...
-
-      
       let userEmail = this.loginForm.controls.userEmail.value;
       let userPassword = this.loginForm.controls.userPassword.value;
 
@@ -76,7 +75,6 @@ export class LoginComponent implements OnInit, OnDestroy {
               this.storageService.saveData("userEmail", userEmail);
               this.router.navigate(['/home']);
             }
-            //TODO : gestion si erreur login
           )
 
       );

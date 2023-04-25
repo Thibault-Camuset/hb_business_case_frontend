@@ -1,0 +1,36 @@
+<app-navbar></app-navbar>
+
+<div class="card mt-5">
+    <form [formGroup]="zoneForm" class="grid flex justify-content-center">
+
+        <div class="flex align-items-center justify-content-center">
+            <div class="p-fluid">
+                <div class="field">
+                    <label for="zoneName">Zone Name</label>
+                    <input 
+                        formControlName="zoneName" 
+                        pInputText 
+                        id="zoneName" 
+                        pTooltip="Enter a Zone name"
+                        tooltipPosition="right" 
+                        type="text" />
+                </div>
+                <div class="field">
+                    <label for="zoneBasePrice">Zone Base Price</label>
+                    <p-inputNumber 
+                        formControlName="zoneBasePrice"
+                        mode="decimal"
+                        [minFractionDigits]="0" 
+                        [maxFractionDigits]="2" 
+                        id="zoneBasePrice" 
+                        pTooltip="Enter a base price for this zone"
+                        tooltipPosition="right">
+                    </p-inputNumber>
+                </div>
+                <p-button label="Add this Zone" (click)="addZone()">
+                </p-button>
+            </div>
+        </div>
+
+    </form>
+</div>

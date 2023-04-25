@@ -7,15 +7,33 @@
             <div class="p-fluid">
                 <div class="field">
                     <label for="adTitle">Ad Title</label>
-                    <input formControlName="adTitle" pInputText id="adTitle" type="text" />
+                    <input 
+                        formControlName="adTitle" 
+                        pInputText 
+                        id="adTitle"
+                        pTooltip="Enter title for your ad" 
+                        tooltipPosition="right" 
+                        type="text" />
                 </div>
                 <div class="field">
                     <label for="adImage">Ad Image</label>
-                    <input formControlName="adImage" pInputText id="adImage" type="text" />
+                    <input 
+                        formControlName="adImage" 
+                        pInputText 
+                        id="adImage" 
+                        pTooltip="Enter a link to your image" 
+                        tooltipPosition="right"
+                        type="text" />
                 </div>
                 <div class="field">
                     <label for="adDescription">Ad Description</label>
-                    <input formControlName="adDescription" pInputText id="adDescription" type="text" />
+                    <input 
+                        formControlName="adDescription" 
+                        pInputText 
+                        id="adDescription" 
+                        pTooltip="Enter a description for your add" 
+                        tooltipPosition="right"
+                        type="text" />
                 </div>
                 <div class="field">
                     <label for="selectedZones">Zones</label>
@@ -24,6 +42,8 @@
                         optionLabel="zoneName" 
                         formControlName="selectedZones" 
                         id="selectedZones"
+                        pTooltip="Choose the zones to display the ad at" 
+                        tooltipPosition="right"
                     >
                     </p-multiSelect>
                 </div>
@@ -34,11 +54,16 @@
                         optionLabel="timeSlotName" 
                         formControlName="selectedTimeSlots" 
                         id="selectedTimeSlots"
+                        pTooltip="Choose the timeslots to diaplay the ad at" 
+                        tooltipPosition="right"
                     >
                     </p-multiSelect>
                 </div>
                 
-                <p-button label="Add this ad" (click)="addAd()"></p-button>
+                <p-button 
+                    label="Add this ad" 
+                    (click)="addAd()">
+                </p-button>
             </div>
         </div>
 

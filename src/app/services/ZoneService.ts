@@ -15,7 +15,7 @@ export class ZoneService {
 
   rootURL = 'http://localhost:8080/api/zones';
 
-  getAll() {
+  public getAll() {
 
     let headers = new HttpHeaders().set("Authorization", 'Bearer ' + this.storage.getData("JWT"));
   
@@ -23,6 +23,35 @@ export class ZoneService {
       .get<Zone[]>(
         this.rootURL + '',
         {headers}
+      );
+
+  }
+
+  public createZone(zoneName: string, zoneBasePrice: number) {
+
+    let headers = {
+        "Authorization" : 'Bearer ' + this.storage.getData("JWT")
+    }
+
+    return this.http
+      .post(
+        this.rootURL +"/"+zoneName+"/"+zoneBasePrice,
+        {}, 
+        {headers}   
+      );
+
+  }
+
+  public deleteZone(zoneId: string) {
+
+    let headers = {
+        "Authorization" : 'Bearer ' + this.storage.getData("JWT")
+    }
+
+    return this.http
+      .delete(
+        this.rootURL +"/"+ zoneId,
+        {headers}   
       );
 
   }
